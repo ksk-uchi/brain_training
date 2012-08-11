@@ -1,0 +1,22 @@
+#gamebox {
+  width: 1400px;
+  height: 800px;
+  border: 1px solid #000;
+  margin: 20px 0px 0px 40px;
+}
+
+#start {
+  width: 1380px;
+  height: 780px;
+  margin: 10px;
+}
+#game {
+  width: 1380px;
+  height: 780px;
+  margin: 10px;
+}
+#over {
+  width: 1380px;
+  height: 780px;
+  margin: 10px;
+}
