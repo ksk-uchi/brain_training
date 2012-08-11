@@ -9,14 +9,25 @@
   width: 1380px;
   height: 780px;
   margin: 10px;
+  background: #ccf;
+  position: absolute;
+  z-index: 1;
 }
+
 #game {
   width: 1380px;
   height: 780px;
   margin: 10px;
+  background: #cfc;
+  position: absolute;
+  z-index: 2;
 }
+
 #over {
   width: 1380px;
   height: 780px;
   margin: 10px;
+  background: #fcc;
+  position: absolute;
+  z-index: 3;
 }

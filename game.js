@@ -1,6 +1,6 @@
 (function(win, doc){
-  // doc.onload = alert("hogehoge.");
+  // doc.onload = start();
   function start () {
-    void(0);
+    alert("hogehoge");
   }
 }(window, document));
