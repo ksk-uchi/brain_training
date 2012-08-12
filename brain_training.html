@@ -9,9 +9,20 @@
     </head>
     <body>
         <div id="gamebox">
-            <canvas id="start" width="1380px" height="780px" style="display: block;"></canvas>
-            <canvas id="game" width="1380px" height="780px" style="display: none;"></canvas>
-            <canvas id="over" width="1380px" height="780px" style="display: none;"></canvas>
+            <ul>
+                <li>
+                    <button id="level_up" class="level">▲</button>
+                </li>
+                <li>
+                    <input id="back_num" class="level" type="text" size="2" maxlength="2" value="0"/>
+                </li>
+                <li>
+                    <button id="level_down" class="level">▼</button>
+                </li>
+            </ul>
+            <canvas id="start" width="780px" height="480px" style="display: block;"></canvas>
+            <canvas id="game" width="780px" height="480px" style="display: none;"></canvas>
+            <canvas id="over" width="780px" height="480px" style="display: none;"></canvas>
         </div><!-- gamebox -->
         <button id="start_btn" class="btn">start canvas</button>
         <button id="game_btn" class="btn">game canvas</button>

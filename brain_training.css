@@ -1,6 +1,6 @@
 #gamebox {
-  width: 1400px;
-  height: 800px;
+  width: 800px;
+  height: 500px;
   border: 1px solid #000;
   margin: 20px 0px 0px 40px;
 }
@@ -12,18 +12,34 @@
   z-index: 1;
 }
 
+.level {
+  top: 200px;
+  position: absolute;
+  z-index: 2;
+}
+
+#level_up {
+  left: 390px;
+}
+#back_num {
+  left: 430px;
+}
+#level_down {
+  left: 490px;
+}
+
 #game {
   margin: 10px;
   background: #cfc;
   position: absolute;
-  z-index: 2;
+  z-index: 11;
 }
 
 #over {
   margin: 10px;
   background: #fcc;
   position: absolute;
-  z-index: 3;
+  z-index: 21;
 }
 
 .btn {
