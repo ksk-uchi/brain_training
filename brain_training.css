@@ -6,8 +6,6 @@
 }
 
 #start {
-  width: 1380px;
-  height: 780px;
   margin: 10px;
   background: #ccf;
   position: absolute;
@@ -15,8 +13,6 @@
 }
 
 #game {
-  width: 1380px;
-  height: 780px;
   margin: 10px;
   background: #cfc;
   position: absolute;
@@ -24,10 +20,12 @@
 }
 
 #over {
-  width: 1380px;
-  height: 780px;
   margin: 10px;
   background: #fcc;
   position: absolute;
   z-index: 3;
+}
+
+.btn {
+  margin: 10px;
 }
