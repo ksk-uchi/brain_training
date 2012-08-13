@@ -27,6 +27,7 @@
   function startPicture() {
     var base = doc.getElementById("start"),
         baseCon = base.getContext("2d");
+
     baseCon.fillStyle = "rgb(168, 168, 255)";
     baseCon.fillRect(0,0,base.width,base.height);
     baseCon.beginPath();
@@ -35,17 +36,85 @@
     baseCon.rect(base.width / 3, 300, base.width / 3, 50);
     baseCon.stroke();
 
+    base.addEventListener("game_start", gamePicture, false);
+
     base.addEventListener('click', function (event) {
       var rect = event.target.getBoundingClientRect(),
           x = event.clientX - rect.left,
-          y = event.clientY - rect.top;
+          y = event.clientY - rect.top,
+          startGame = doc.createEvent("HTMLEvents");
+
+      startGame.initEvent("game_start", true, false);
+
       if (x > base.width / 3 && x < base.width * 2 / 3) {
         if (y > 300 && y < 350) {
-          toggleDisplay(doc.getElementById("game"));
+          this.dispatchEvent(startGame);
+          // toggleDisplay(doc.getElementById("game"));
         }
       }
-    }, true);
+    }, false);
 
+  }
+
+  function gamePicture (event) {
+    var game = doc.getElementById("game"),
+        level = doc.getElementById("back_num").value,
+        famulas = [],
+        actual_answer = [],
+        answer_check = [],
+        i = 0,
+        flg_miss = 0,
+        l, famula, users_answer, expect;
+
+    toggleDisplay(game);
+    famulas = famulas.concat(createEasyFomulas(10));
+    for (i, l = famulas.length; i < l; i+=1) {
+      if (i < level) {
+        famula = famulas[i].first + famulas[i].operator + famulas[i].second;
+        answer_check.push(famula);
+        actual_answer.push(eval(famula));
+        alert(famula + "= ?");
+      } else {
+        famula = famulas[i].first + famulas[i].operator + famulas[i].second;
+        answer_check.push(famula);
+        actual_answer.push(eval(famula));
+        users_answer = prompt(famula + "= ?");
+        answer_check[i - level] += "= " + users_answer;
+        expect = actual_answer.shift();
+        if (users_answer != expect) {
+          flg_miss = 1;
+          break;
+        }
+      }
+    }
+    console.log(answer_check);
+  }
+
+  // make fomulas of the sum or the difference that an answer become 1 column.
+  function createEasyFomulas (amount) {
+    var fomulas = [], i = 0, x, y, big, small;
+    for (; i < amount; i+=1) {
+      x = parseInt(Math.random() * 10);
+      y = parseInt(Math.random() * 10);
+
+      big = x > y ? x : y;
+      small = big === y ? x : y;
+
+      if (big + small >= 9) {
+        fomulas.push({
+          first: big,
+          second: small,
+          operator: "-"
+        });
+      } else {
+        fomulas.push({
+          first: big,
+          second: small,
+          operator: "+"
+        });
+      }
+    }
+    return fomulas;
   }
 
   function decideBackNum(elems) {
