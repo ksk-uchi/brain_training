@@ -3,9 +3,9 @@
   function fordebug() {
     var btn = ["start_btn", "game_btn", "over_btn"],
         btnLayer = {
-      start_btn: "start",
-      game_btn:  "game",
-      over_btn:  "over"
+          start_btn: "start",
+          game_btn:  "game",
+          over_btn:  "over"
     };
     btn.map(function (val, index, array) {
       doc.getElementById(val).onclick = function () {
