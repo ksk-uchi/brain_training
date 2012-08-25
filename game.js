@@ -94,8 +94,8 @@
   function createEasyFomulas (amount) {
     var fomulas = [], i = 0, x, y, big, small;
     for (; i < amount; i+=1) {
-      x = parseInt(Math.random() * 10);
-      y = parseInt(Math.random() * 10);
+      x = (Math.random() * 10) >> 0;
+      y = (Math.random() * 10) >> 0;
 
       big = x > y ? x : y;
       small = big === y ? x : y;
