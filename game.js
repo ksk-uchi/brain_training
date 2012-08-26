@@ -23,10 +23,20 @@
     }
   }
 
+  // make html event.
+  function createHtmlEvent(obj, eName, callback) {
+    var eObj;
+    obj.addEventListener(eName, callback, false);
+    eObj = doc.createEvent("HTMLEvents");
+    eObj.initEvent(eName, true, false);
+    return eObj;
+  }
+
   // start ui.
   function startPicture() {
     var base = doc.getElementById("start"),
-        baseCon = base.getContext("2d");
+        baseCon = base.getContext("2d"),
+        startGame = createHtmlEvent(base, "game_start", gamePicture);
 
     baseCon.fillStyle = "rgb(168, 168, 255)";
     baseCon.fillRect(0,0,base.width,base.height);
@@ -36,26 +46,21 @@
     baseCon.rect(base.width / 3, 300, base.width / 3, 50);
     baseCon.stroke();
 
-    base.addEventListener("game_start", gamePicture, false);
-
     base.addEventListener('click', function (event) {
       var rect = event.target.getBoundingClientRect(),
           x = event.clientX - rect.left,
-          y = event.clientY - rect.top,
-          startGame = doc.createEvent("HTMLEvents");
-
-      startGame.initEvent("game_start", true, false);
+          y = event.clientY - rect.top;
 
       if (x > base.width / 3 && x < base.width * 2 / 3) {
         if (y > 300 && y < 350) {
           this.dispatchEvent(startGame);
-          // toggleDisplay(doc.getElementById("game"));
         }
       }
     }, false);
 
   }
 
+  // game ui.
   function gamePicture (event) {
     var game = doc.getElementById("game"),
         level = doc.getElementById("back_num").value,
@@ -67,6 +72,7 @@
         l, famula, users_answer, expect;
 
     toggleDisplay(game);
+
     famulas = famulas.concat(createEasyFomulas(10));
     for (i, l = famulas.length; i < l; i+=1) {
       if (i < level) {
@@ -87,7 +93,14 @@
         }
       }
     }
-    console.log(answer_check);
+    overPicture(answer_check);
+  }
+
+  // game over ui.
+  function overPicture(answer) {
+    var over = doc.getElementById("over");
+    toggleDisplay(over);
+    console.log(answer);
   }
 
   // make fomulas of the sum or the difference that an answer become 1 column.
@@ -119,17 +132,17 @@
 
   function decideBackNum(elems) {
     var back_num = doc.getElementById("back_num");
-    elems.map(function (val, index, array) {
-      switch (val.id) {
+    elems.map(function (elem, index, array) {
+      switch (elem.id) {
         case "level_up":
-          val.onclick = function () {
+          elem.onclick = function () {
             if (back_num.value * 1 < 9) {
               back_num.value = back_num.value * 1 + 1;
             }
           };
           break;
         case "level_down":
-          val.onclick = function () {
+          elem.onclick = function () {
             if (back_num.value * 1 > 0) {
               back_num.value = back_num.value * 1 - 1;
             }
